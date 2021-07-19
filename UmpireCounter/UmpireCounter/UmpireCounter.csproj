@@ -1,0 +1,21 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <ProduceReferenceAssembly>true</ProduceReferenceAssembly>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Xamarin.Forms" Version="5.0.0.2083" />  
+    <PackageReference Include="Xamarin.Essentials" Version="1.7.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="BasicCounter.xaml.cs">
+      <DependentUpon>BasicCounter.xaml</DependentUpon>
+    </Compile>
+    <Compile Update="AdvancedCounter.xaml.cs">
+      <DependentUpon>AdvancedCounter.xaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+</Project>
