@@ -3,10 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="UmpireCounter.BasicCounter"
              Title="Basic Counter">
-    <!--
-    <ContentPage.BindingContext>
-        <vm:AboutViewModel />
-    </ContentPage.BindingContext> -->
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Reset" Clicked="resetButtonClicked"/>
+    </ContentPage.ToolbarItems>
     
     <ContentPage.Resources>
         <ResourceDictionary>

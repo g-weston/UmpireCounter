@@ -9,9 +9,10 @@ namespace UmpireCounter
     {
         public BasicCounter()
         {
+            UpdateDisplay();
             InitializeComponent();
             BindingContext = this;
-            UpdateDisplay();
+            
         }
 
         private string oversHeader = Score.Overs.ToString();
@@ -43,6 +44,12 @@ namespace UmpireCounter
         void UpdateDisplay()
         {
             OversHeader = Score.Overs.ToString();
+        }
+
+        private void resetButtonClicked(object sender, EventArgs e)
+        {
+            TextFileStorage.resetScore();
+            UpdateDisplay();
         }
     }
 }

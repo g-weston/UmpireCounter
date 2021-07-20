@@ -11,10 +11,12 @@ namespace UmpireCounter
         {
             InitializeComponent();
             MainPage = new AppShell();
+            TextFileStorage.readScore();
         }
 
         protected override void OnStart()
         {
+            
         }
 
         protected override void OnSleep()

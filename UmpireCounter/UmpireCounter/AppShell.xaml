@@ -109,10 +109,19 @@
     <Shell.FlyoutHeaderTemplate>
         <DataTemplate>
             <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height ="Auto" />
+                    <RowDefinition Height = "Auto"/>
+                </Grid.RowDefinitions>
                 <BoxView Color="{StaticResource Primary}"
                          HorizontalOptions="Fill"
-                         HeightRequest="40" />
-                <Image Source="UmpireCounterLogoMedium" />
+                         HeightRequest="40"
+                         Grid.Row="0" />
+                <Image Source="UmpireCounterLogoMedium" 
+                       Grid.Row="0" />
+                <BoxView Color="White"
+                         HeightRequest="5"
+                         Grid.Row="1" />
             </Grid>
         </DataTemplate>
     </Shell.FlyoutHeaderTemplate>

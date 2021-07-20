@@ -81,11 +81,16 @@ namespace UmpireCounter
             UpdateDisplay();
         }
 
-        void UpdateDisplay()
+        public void UpdateDisplay()
         {
             OversHeader = Score.Overs.ToString();
             ScoreHeader = Score.Total.ToString() + "-" + Score.Wickets.ToString();
         }
-        
+
+        private void resetButtonClicked(object sender, EventArgs e)
+        {
+            TextFileStorage.resetScore();
+            UpdateDisplay();
+        }
     }
 }
