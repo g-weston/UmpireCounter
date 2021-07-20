@@ -14,6 +14,7 @@ namespace UmpireCounter
             InitializeComponent();
 
             BindingContext = this;
+            UpdateDisplay();
         }
 
         private string oversHeader = Score.Overs.ToString();
