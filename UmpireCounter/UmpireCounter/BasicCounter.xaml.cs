@@ -29,13 +29,13 @@ namespace UmpireCounter
             }
         }
 
-        async void increaseOversClicked(object sender, EventArgs e)
+        void IncreaseOversClicked(object sender, EventArgs e)
         {
             Score.IncreaseBalls();
             UpdateDisplay();
         }
 
-        async void decreaseOversClicked(object sender, EventArgs e)
+        void DecreaseOversClicked(object sender, EventArgs e)
         {
             Score.DecreaseBalls();
             UpdateDisplay();
@@ -46,10 +46,14 @@ namespace UmpireCounter
             OversHeader = Score.Overs.ToString();
         }
 
-        private void resetButtonClicked(object sender, EventArgs e)
+        public async void ResetButtonClicked(object sender, EventArgs e)
         {
-            TextFileStorage.resetScore();
-            UpdateDisplay();
+            bool resetConfirm = await DisplayAlert("Reset", "Are you sure you want to reset?", "Yes", "Cancel");
+            if (resetConfirm)
+            {
+                TextFileStorage.ResetScore(); 
+                UpdateDisplay();
+            }
         }
     }
 }

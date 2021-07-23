@@ -15,14 +15,14 @@
         <ResourceDictionary>
             <Style x:Key="BaseStyle" TargetType="Element">
                 <Setter Property="Shell.BackgroundColor" Value="{StaticResource Primary}" />
-                <Setter Property="Shell.ForegroundColor" Value="White" />
-                <Setter Property="Shell.TitleColor" Value="White" />
+                <Setter Property="Shell.ForegroundColor" Value="{StaticResource Secondary}" />
+                <Setter Property="Shell.TitleColor" Value="{StaticResource Secondary}" />
                 <Setter Property="Shell.DisabledColor" Value="#B4FFFFFF" />
                 <Setter Property="Shell.UnselectedColor" Value="#95FFFFFF" />
                 <Setter Property="Shell.TabBarBackgroundColor" Value="{StaticResource Primary}" />
-                <Setter Property="Shell.TabBarForegroundColor" Value="White"/>
+                <Setter Property="Shell.TabBarForegroundColor" Value="{StaticResource Secondary}"/>
                 <Setter Property="Shell.TabBarUnselectedColor" Value="#95FFFFFF"/>
-                <Setter Property="Shell.TabBarTitleColor" Value="White"/>
+                <Setter Property="Shell.TabBarTitleColor" Value="{StaticResource Secondary}"/>
             </Style>
             <Style TargetType="TabBar" BasedOn="{StaticResource BaseStyle}" />
             <Style TargetType="FlyoutItem" BasedOn="{StaticResource BaseStyle}" />
@@ -87,7 +87,7 @@
 
     <!-- When the Flyout is visible this will be a menu item you can tie a click behavior to  -->
     <!--
-    <MenuItem Text="Logout" StyleClass="MenuItemLayoutStyle" Clicked="OnMenuItemClicked">
+    <MenuItem Text="About" StyleClass="MenuItemLayoutStyle" Clicked="AboutButtonClicked">
     </MenuItem> -->
 
     <!--
@@ -98,7 +98,7 @@
         await Shell.Current.GoToAsync("//LoginPage");
     
     <TabBar>
-        <ShellContent Route="LoginPage" ContentTemplate="{DataTemplate local:LoginPage}" />
+        <ShellContent Route="LoginPage" ContentTemplate="{DataTemplate local:AboutPage}" />
     </TabBar> -->
 
     <!---Optional Templates 
@@ -119,7 +119,7 @@
                          Grid.Row="0" />
                 <Image Source="UmpireCounterLogoMedium" 
                        Grid.Row="0" />
-                <BoxView Color="White"
+                <BoxView Color="{StaticResource Secondary}"
                          HeightRequest="5"
                          Grid.Row="1" />
             </Grid>
@@ -145,7 +145,20 @@
             </ContentView>
         </DataTemplate>
     </Shell.MenuItemTemplate> -->
-
+    <Shell.FlyoutFooterTemplate>
+        <DataTemplate>
+            <StackLayout BackgroundColor="{StaticResource Primary}">
+                <Button TextColor="{StaticResource Secondary}"
+                        Text="About"
+                        Clicked="AboutButtonClicked"/>
+                <Label Text="Version"
+                       TextColor="{StaticResource Secondary}"
+                       HorizontalTextAlignment="Center"/>
+                <BoxView Color="{StaticResource Primary}"
+                         HeightRequest="5"/>
+            </StackLayout>
+        </DataTemplate>
+    </Shell.FlyoutFooterTemplate>
     
 
 </Shell>

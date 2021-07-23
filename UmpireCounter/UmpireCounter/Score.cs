@@ -24,7 +24,7 @@ namespace UmpireCounter
             }
 
             Score.Overs = Math.Round(Score.Overs, 1);
-            TextFileStorage.writeScore();
+            TextFileStorage.WriteScore();
         }
 
         public static void DecreaseBalls()
@@ -47,13 +47,13 @@ namespace UmpireCounter
             }
 
             Score.Overs = Math.Round(Score.Overs, 1);
-            TextFileStorage.writeScore();
+            TextFileStorage.WriteScore();
         }
 
         public static void IncreaseTotal()
         {
             Score.Total++;
-            TextFileStorage.writeScore();
+            TextFileStorage.WriteScore();
         }
 
         public static void DecreaseTotal()
@@ -63,13 +63,13 @@ namespace UmpireCounter
             {
                 Score.Total = 0;
             }
-            TextFileStorage.writeScore();
+            TextFileStorage.WriteScore();
         }
 
         public static void IncreaseWickets()
         {
             Score.Wickets++;
-            TextFileStorage.writeScore();
+            TextFileStorage.WriteScore();
         }
 
         public static void DecreaseWickets()
@@ -79,7 +79,15 @@ namespace UmpireCounter
             {
                 Score.Wickets = 0;
             }
-            TextFileStorage.writeScore();
+            TextFileStorage.WriteScore();
+        }
+
+        public static void ResetScore()
+        {
+            Score.Total = 0;
+            Score.Wickets = 0;
+            Score.Overs = 0;
+            Score.ValidDeliveriesInOver = 0;
         }
     }
 }

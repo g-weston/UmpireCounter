@@ -7,8 +7,6 @@ namespace UmpireCounter
 {
     public partial class AdvancedCounter : ContentPage, INotifyPropertyChanged
     {
-        /*ItemsViewModel _viewModel; */
-
         public AdvancedCounter()
         {
             InitializeComponent();
@@ -45,37 +43,37 @@ namespace UmpireCounter
             }
         }
 
-        async void increaseOversClicked(object sender, EventArgs e)
+        void IncreaseOversClicked(object sender, EventArgs e)
         {
             Score.IncreaseBalls();
             UpdateDisplay();
         }
 
-        async void decreaseOversClicked(object sender, EventArgs e)
+        void DecreaseOversClicked(object sender, EventArgs e)
         {
             Score.DecreaseBalls();
             UpdateDisplay();
         }
 
-        async void increaseWicketsClicked(object sender, EventArgs e)
+        void IncreaseWicketsClicked(object sender, EventArgs e)
         {
             Score.IncreaseWickets();
             UpdateDisplay();
         }
 
-        async void decreaseWicketsClicked(object sender, EventArgs e)
+        void DecreaseWicketsClicked(object sender, EventArgs e)
         {
             Score.DecreaseWickets();
             UpdateDisplay();
         }
 
-        async void increaseTotalClicked(object sender, EventArgs e)
+        void IncreaseTotalClicked(object sender, EventArgs e)
         {
             Score.IncreaseTotal();
             UpdateDisplay();
         }
 
-        async void decreaseTotalClicked(object sender, EventArgs e)
+        void DecreaseTotalClicked(object sender, EventArgs e)
         {
             Score.DecreaseTotal();
             UpdateDisplay();
@@ -87,10 +85,14 @@ namespace UmpireCounter
             ScoreHeader = Score.Total.ToString() + "-" + Score.Wickets.ToString();
         }
 
-        private void resetButtonClicked(object sender, EventArgs e)
+        public async void ResetButtonClicked(object sender, EventArgs e)
         {
-            TextFileStorage.resetScore();
-            UpdateDisplay();
+            bool resetConfirm = await DisplayAlert("Reset", "Are you sure you want to reset?", "Yes", "Cancel");
+            if (resetConfirm)
+            {
+                TextFileStorage.ResetScore();
+                UpdateDisplay();
+            }
         }
     }
 }

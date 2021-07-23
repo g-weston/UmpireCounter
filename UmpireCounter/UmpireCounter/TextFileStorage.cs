@@ -9,21 +9,21 @@ namespace UmpireCounter
 {
     class TextFileStorage
     {
-        public static string filePath = Path.Combine(Xamarin.Essentials.FileSystem.AppDataDirectory, "Score.txt");
+        public static string FilePath = Path.Combine(Xamarin.Essentials.FileSystem.AppDataDirectory, "Score.txt");
         
-        public static void readScore()
+        public static void ReadScore()
         {
-            if (filePath == null || !File.Exists(filePath))
+            if (FilePath == null || !File.Exists(FilePath))
             {
-                resetScore();
+                ResetScore();
             }
             else
             {
                 List<string> fileContents = new List<string>();
-                StreamReader file = new StreamReader(filePath);
+                StreamReader fileRead = new StreamReader(FilePath);
 
                 string line;
-                while ((line = file.ReadLine()) != null)
+                while ((line = fileRead.ReadLine()) != null)
                 {
                     fileContents.Add(line);
                 }
@@ -43,34 +43,31 @@ namespace UmpireCounter
                     Score.Overs = overs;
                     Score.ValidDeliveriesInOver = Convert.ToInt32((overs - Math.Floor(Score.Overs)) * 10);
                 }
-                file.Dispose();
+                fileRead.Dispose();
             }
         }
 
-        public static void writeScore()
+        public static void WriteScore()
         {
-            using (StreamWriter file = new StreamWriter(filePath))
+            using (StreamWriter fileWrite = new StreamWriter(FilePath))
             {
-                file.AutoFlush = true;
+                fileWrite.AutoFlush = true;
 
-                file.WriteLine(Score.Total.ToString());
-                file.WriteLine(Score.Wickets.ToString());
-                file.WriteLine(Score.Overs.ToString());
+                fileWrite.WriteLine(Score.Total.ToString());
+                fileWrite.WriteLine(Score.Wickets.ToString());
+                fileWrite.WriteLine(Score.Overs.ToString());
 
-                file.Flush();
-                file.Close();
-                file.Dispose();
+                fileWrite.Flush();
+                fileWrite.Close();
+                fileWrite.Dispose();
             }
             
         }
 
-        public static void resetScore()
+        public static void ResetScore()
         {
-            Score.Total = 0;
-            Score.Wickets = 0;
-            Score.Overs = 0;
-            Score.ValidDeliveriesInOver = 0;
-            writeScore();
+            Score.ResetScore();
+            WriteScore();
         }
     }
 

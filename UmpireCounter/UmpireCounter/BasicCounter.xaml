@@ -5,7 +5,7 @@
              Title="Basic Counter">
 
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Reset" Clicked="resetButtonClicked"/>
+        <ToolbarItem Text="Reset" Clicked="ResetButtonClicked"/>
     </ContentPage.ToolbarItems>
     
     <ContentPage.Resources>
@@ -28,8 +28,8 @@
 
         <Label Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="0" Text="{Binding OversHeader}" FontSize="Header" TextColor="DodgerBlue" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" />
         <Label Grid.Column="1" Grid.Row="1" Text="Balls Bowled" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="Large" TextColor="DodgerBlue" />
-        <Button Grid.Column="0" Grid.Row="1" Text="-" FontSize="Large" Clicked="decreaseOversClicked" />
-        <Button Grid.Column="2" Grid.Row="1" Text="+" FontSize="Large" Clicked="increaseOversClicked" />
+        <Button Grid.Column="0" Grid.Row="1" Text="-" FontSize="Large" Clicked="DecreaseOversClicked" CornerRadius="25" BorderColor="{StaticResource Secondary}" BorderWidth="5"/>
+        <Button Grid.Column="2" Grid.Row="1" Text="+" FontSize="Large" Clicked="IncreaseOversClicked" CornerRadius="25" BorderColor="{StaticResource Secondary}" BorderWidth="5"/>
     </Grid>
 
 </ContentPage>
