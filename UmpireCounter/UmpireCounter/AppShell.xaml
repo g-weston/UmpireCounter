@@ -85,6 +85,9 @@
         <ShellContent Route="AdvancedCounter" ContentTemplate="{DataTemplate local:AdvancedCounter}" />
     </FlyoutItem>
 
+    <FlyoutItem Title="Settings">
+        <ShellContent Route="SettingsPage" ContentTemplate="{DataTemplate local:SettingsPage}" />
+    </FlyoutItem>
     <!-- When the Flyout is visible this will be a menu item you can tie a click behavior to  -->
     <!--
     <MenuItem Text="About" StyleClass="MenuItemLayoutStyle" Clicked="AboutButtonClicked">

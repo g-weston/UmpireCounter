@@ -15,7 +15,7 @@ namespace UmpireCounter
             
         }
 
-        private string oversHeader = Score.Overs.ToString();
+        private string oversHeader = Score.OversCompleted.ToString() + "." + Score.ValidDeliveriesInOver.ToString();
         public string OversHeader
         {
             get => oversHeader;
@@ -32,18 +32,20 @@ namespace UmpireCounter
         void IncreaseOversClicked(object sender, EventArgs e)
         {
             Score.IncreaseBalls();
+            SettingsPage.VibrateChecker();
             UpdateDisplay();
         }
 
         void DecreaseOversClicked(object sender, EventArgs e)
         {
             Score.DecreaseBalls();
+            SettingsPage.VibrateChecker();
             UpdateDisplay();
         }
 
         void UpdateDisplay()
         {
-            OversHeader = Score.Overs.ToString();
+            OversHeader = Score.OversCompleted.ToString() + "." + Score.ValidDeliveriesInOver.ToString();
         }
 
         public async void ResetButtonClicked(object sender, EventArgs e)

@@ -16,7 +16,7 @@
                     <ColumnDefinition Width="5"/>
                     <ColumnDefinition Width="*"/>
                     <ColumnDefinition Width="5"/>
-            </Grid.ColumnDefinitions>
+                </Grid.ColumnDefinitions>
 
                 <Label Text="Cricket Umpire Counter"
                        VerticalOptions="CenterAndExpand" 

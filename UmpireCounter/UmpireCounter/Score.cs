@@ -1,4 +1,4 @@
-﻿using System;
+﻿ using System;
 using System.Collections.Generic;
 using System.Dynamic;
 using System.Text;
@@ -10,43 +10,40 @@ namespace UmpireCounter
         public static int Total { get; set; }
         public static int Wickets { get; set; }
         public static int ValidDeliveriesInOver { get; set; }
-        public static double Overs { get; set; }
+        public static int OversCompleted { get; set; }
+        public static int BallsInOver { get; set; }
 
         public static void IncreaseBalls()
         {
-            Score.Overs += 0.1;
             Score.ValidDeliveriesInOver++;
 
-            if (Score.ValidDeliveriesInOver == 6)
+            if (Score.ValidDeliveriesInOver == Score.BallsInOver)
             {
-                Score.Overs += 0.4;
+                Score.OversCompleted++;
                 Score.ValidDeliveriesInOver = 0;
             }
 
-            Score.Overs = Math.Round(Score.Overs, 1);
             TextFileStorage.WriteScore();
         }
 
         public static void DecreaseBalls()
         {
-            if (Score.Overs % 1 == 0)
+            if (Score.ValidDeliveriesInOver == 0)
             {
-                Score.ValidDeliveriesInOver = 5;
-                Score.Overs -= 0.5;
+                Score.ValidDeliveriesInOver = (Score.BallsInOver - 1);
+                Score.OversCompleted--;
             }
             else
             {
                 Score.ValidDeliveriesInOver--;
-                Score.Overs -= 0.1;
             }
 
-            if (Score.Overs < 0)
+            if (Score.OversCompleted < 0)
             {
-                Score.Overs = 0;
+                Score.OversCompleted = 0;
                 Score.ValidDeliveriesInOver = 0;
             }
 
-            Score.Overs = Math.Round(Score.Overs, 1);
             TextFileStorage.WriteScore();
         }
 
@@ -86,7 +83,7 @@ namespace UmpireCounter
         {
             Score.Total = 0;
             Score.Wickets = 0;
-            Score.Overs = 0;
+            Score.OversCompleted = 0;
             Score.ValidDeliveriesInOver = 0;
         }
     }

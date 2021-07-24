@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.Text;
 using System.IO;
 using System.Security.Cryptography.X509Certificates;
@@ -9,21 +10,22 @@ namespace UmpireCounter
 {
     class TextFileStorage
     {
-        public static string FilePath = Path.Combine(Xamarin.Essentials.FileSystem.AppDataDirectory, "Score.txt");
-        
+        public static string FilePathScore = Path.Combine(Xamarin.Essentials.FileSystem.AppDataDirectory, "Score.txt");
+        public static string FilePathSettings = Path.Combine(Xamarin.Essentials.FileSystem.AppDataDirectory, "Settings.txt");
+
         public static void ReadScore()
         {
-            if (FilePath == null || !File.Exists(FilePath))
+            if (FilePathScore == null || !File.Exists(FilePathScore))
             {
                 ResetScore();
             }
             else
             {
                 List<string> fileContents = new List<string>();
-                StreamReader fileRead = new StreamReader(FilePath);
+                StreamReader fileScoreRead = new StreamReader(FilePathScore);
 
                 string line;
-                while ((line = fileRead.ReadLine()) != null)
+                while ((line = fileScoreRead.ReadLine()) != null)
                 {
                     fileContents.Add(line);
                 }
@@ -38,28 +40,33 @@ namespace UmpireCounter
                     Score.Wickets = wickets;
                 }
 
-                if (double.TryParse(fileContents[2], out double overs))
+                if (int.TryParse(fileContents[2], out int overs))
                 {
-                    Score.Overs = overs;
-                    Score.ValidDeliveriesInOver = Convert.ToInt32((overs - Math.Floor(Score.Overs)) * 10);
+                    Score.OversCompleted = overs;
                 }
-                fileRead.Dispose();
+
+                if (int.TryParse(fileContents[2], out int ballsInOver))
+                {
+                    Score.ValidDeliveriesInOver = ballsInOver;
+                }
+
+                fileScoreRead.Dispose();
             }
         }
 
         public static void WriteScore()
         {
-            using (StreamWriter fileWrite = new StreamWriter(FilePath))
+            using (StreamWriter fileScoreWrite = new StreamWriter(FilePathScore))
             {
-                fileWrite.AutoFlush = true;
+                fileScoreWrite.AutoFlush = true;
 
-                fileWrite.WriteLine(Score.Total.ToString());
-                fileWrite.WriteLine(Score.Wickets.ToString());
-                fileWrite.WriteLine(Score.Overs.ToString());
+                fileScoreWrite.WriteLine(Score.Total.ToString());
+                fileScoreWrite.WriteLine(Score.Wickets.ToString());
+                fileScoreWrite.WriteLine(Score.OversCompleted.ToString());
 
-                fileWrite.Flush();
-                fileWrite.Close();
-                fileWrite.Dispose();
+                fileScoreWrite.Flush();
+                fileScoreWrite.Close();
+                fileScoreWrite.Dispose();
             }
             
         }
@@ -68,6 +75,58 @@ namespace UmpireCounter
         {
             Score.ResetScore();
             WriteScore();
+        }
+
+        public static void ReadSettings()
+        {
+            if (FilePathSettings == null || !File.Exists(FilePathSettings))
+            {
+                Score.BallsInOver = 6;
+                SettingsPage.Vibrate = true;
+                TextFileStorage.WriteSettings();
+            }
+            else
+            {
+                List<string> fileSettingsContents = new List<string>();
+                StreamReader fileSettingsRead = new StreamReader(FilePathSettings);
+
+                string line;
+                while ((line = fileSettingsRead.ReadLine()) != null)
+                {
+                    fileSettingsContents.Add(line);
+                }
+
+                if (fileSettingsContents[0] == "True")
+                {
+                    SettingsPage.Vibrate = true;
+                }
+                else if (fileSettingsContents[0] == "False")
+                {
+                    SettingsPage.Vibrate = false;
+                }
+
+                if (int.TryParse(fileSettingsContents[1], out int ballsOver))
+                {
+                    Score.BallsInOver = ballsOver;
+                }
+            }
+            
+        }
+
+        public static void WriteSettings()
+        {
+            using (StreamWriter fileSettingsWrite = new StreamWriter(FilePathSettings))
+            {
+                fileSettingsWrite.AutoFlush = true;
+
+                fileSettingsWrite.WriteLine(SettingsPage.Vibrate.ToString());
+                fileSettingsWrite.WriteLine(Score.BallsInOver.ToString());
+                
+                fileSettingsWrite.Flush();
+                fileSettingsWrite.Close();
+                fileSettingsWrite.Dispose();
+            }
+
         }
     }
 
