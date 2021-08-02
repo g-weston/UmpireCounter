@@ -2,32 +2,26 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:umpireCounter="clr-namespace:UmpireCounter;assembly=UmpireCounter"
-             x:Class="UmpireCounter.SettingsPage">
+             x:Class="UmpireCounter.SettingsPage"
+             Title="Settings">
     <ContentPage.Content>
-        <Grid>
+        <Grid   VerticalOptions="FillAndExpand">
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="6*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="6*"/>
             </Grid.RowDefinitions>
 
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="5"/>
-                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="2*"/>
                 <ColumnDefinition Width="2*"/>
                 <ColumnDefinition Width="5"/>
             </Grid.ColumnDefinitions>
 
-            <Label Text="Settings"
-                   FontSize="Large"
-                   TextColor="{StaticResource Primary}"
-                   HorizontalOptions="CenterAndExpand"
-                   VerticalOptions="CenterAndExpand"
-                   Grid.Row="0"
-                   Grid.Column="1"
-                   Grid.ColumnSpan="2"/>
-
+            
             <Label Text="Balls in an over"
                    FontSize="Medium"
                    HorizontalOptions="CenterAndExpand"
@@ -42,9 +36,16 @@
                    Grid.Row="2"
                    Grid.Column="1"/>
 
+            <Label Text="Innings Timer"
+                   FontSize="Medium"
+                   HorizontalOptions="CenterAndExpand"
+                   VerticalOptions="CenterAndExpand"
+                   Grid.Row="3"
+                   Grid.Column="1"/>
+
             <Entry x:Name="EntryBallsInOver" 
                    ClearButtonVisibility="WhileEditing"
-                   Placeholder="{Binding Score.BallsInOver}"
+                   Placeholder="{Binding BallsInOverPlaceHolder}"
                    TextColor="Gray"
                    Keyboard="Numeric"
                    Grid.Row="1"
@@ -52,18 +53,26 @@
 
             <Switch Toggled="VibrateButtonsSwitch"
                     IsToggled="True"
-                    ThumbColor="DodgerBlue"
-                    OnColor="MediumVioletRed"
+                    ThumbColor="Gray"
+                    OnColor="{StaticResource Primary}"
                     HorizontalOptions="Center" 
                     Grid.Row="2" 
                     Grid.Column="2"/>
-            
+
+            <Switch Toggled="TimerButtonsSwitch"
+                    IsToggled="True"
+                    ThumbColor="Gray"
+                    OnColor="{StaticResource Primary}"
+                    HorizontalOptions="Center" 
+                    Grid.Row="3" 
+                    Grid.Column="2"/>
+
             <Button Text="Update"
                     TextColor="{StaticResource Secondary}"
                     Clicked="UpdateSettingsClicked"
-                    VerticalOptions="EndAndExpand"
+                    VerticalOptions="CenterAndExpand"
                     HorizontalOptions="CenterAndExpand"
-                    Grid.Row="3"
+                    Grid.Row="4"
                     Grid.Column="1"
                     Grid.ColumnSpan="2"/>
         </Grid>

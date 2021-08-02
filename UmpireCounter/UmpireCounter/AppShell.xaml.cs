@@ -14,8 +14,8 @@ namespace UmpireCounter
 
         private async void AboutButtonClicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new AboutPage());
             Shell.Current.FlyoutIsPresented = false;
+            await Navigation.PushAsync(new AboutPage());
         }
     }
 }

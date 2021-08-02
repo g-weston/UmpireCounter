@@ -45,11 +45,32 @@ namespace UmpireCounter
                     Score.OversCompleted = overs;
                 }
 
-                if (int.TryParse(fileContents[2], out int ballsInOver))
+                if (int.TryParse(fileContents[3], out int ballsInOver))
                 {
                     Score.ValidDeliveriesInOver = ballsInOver;
                 }
 
+                if (fileContents[5] != null)
+                {
+                    if (fileContents[5] == "True")
+                    {
+                        if (fileContents[4] != null)
+                        {
+                            Score.InningsStartTime = DateTime.Parse(fileContents[4]);
+                            if (Score.InningsStartTime != null)
+                            {
+                                Score.UpdateInningsTimer();
+                                Score.InningsInPlay = true;
+                            }
+                        }
+                    }
+                    else
+                    {
+                        Score.InningsTime = "Innings hasn't started";
+                        Score.InningsInPlay = false;
+                    }
+                }            
+                
                 fileScoreRead.Dispose();
             }
         }
@@ -63,6 +84,9 @@ namespace UmpireCounter
                 fileScoreWrite.WriteLine(Score.Total.ToString());
                 fileScoreWrite.WriteLine(Score.Wickets.ToString());
                 fileScoreWrite.WriteLine(Score.OversCompleted.ToString());
+                fileScoreWrite.WriteLine(Score.ValidDeliveriesInOver.ToString());
+                fileScoreWrite.WriteLine(Score.InningsStartTime.ToString());
+                fileScoreWrite.WriteLine(Score.InningsInPlay.ToString());
 
                 fileScoreWrite.Flush();
                 fileScoreWrite.Close();
@@ -83,6 +107,7 @@ namespace UmpireCounter
             {
                 Score.BallsInOver = 6;
                 SettingsPage.Vibrate = true;
+                SettingsPage.TimerOnOff = true;
                 TextFileStorage.WriteSettings();
             }
             else
@@ -95,20 +120,40 @@ namespace UmpireCounter
                 {
                     fileSettingsContents.Add(line);
                 }
-
-                if (fileSettingsContents[0] == "True")
+                fileSettingsRead.Dispose();
+                if (fileSettingsContents.Count != 0)
                 {
+                    if (fileSettingsContents[0] == "True")
+                    {
+                        SettingsPage.Vibrate = true;
+                    }
+                    else if (fileSettingsContents[0] == "False")
+                    {
+                        SettingsPage.Vibrate = false;
+                    }
+
+                    if (fileSettingsContents[2] == "True")
+                    {
+                        SettingsPage.TimerOnOff = true;
+                    }
+                    else if (fileSettingsContents[2] == "False")
+                    {
+                        SettingsPage.TimerOnOff = false;
+                    }
+
+                    if (int.TryParse(fileSettingsContents[1], out int ballsOver))
+                    {
+                        Score.BallsInOver = ballsOver;
+                    }
+                }
+                else
+                {
+                    Score.BallsInOver = 6;
                     SettingsPage.Vibrate = true;
+                    SettingsPage.TimerOnOff = true;
+                    TextFileStorage.WriteSettings();
                 }
-                else if (fileSettingsContents[0] == "False")
-                {
-                    SettingsPage.Vibrate = false;
-                }
-
-                if (int.TryParse(fileSettingsContents[1], out int ballsOver))
-                {
-                    Score.BallsInOver = ballsOver;
-                }
+                
             }
             
         }
@@ -121,7 +166,8 @@ namespace UmpireCounter
 
                 fileSettingsWrite.WriteLine(SettingsPage.Vibrate.ToString());
                 fileSettingsWrite.WriteLine(Score.BallsInOver.ToString());
-                
+                fileSettingsWrite.WriteLine(SettingsPage.TimerOnOff.ToString());
+
                 fileSettingsWrite.Flush();
                 fileSettingsWrite.Close();
                 fileSettingsWrite.Dispose();

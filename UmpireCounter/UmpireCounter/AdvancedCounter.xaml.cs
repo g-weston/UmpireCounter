@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -10,9 +11,14 @@ namespace UmpireCounter
         public AdvancedCounter()
         {
             InitializeComponent();
-
             BindingContext = this;
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
             UpdateDisplay();
+            DeviceDisplay.KeepScreenOn = true;
         }
 
         private string oversHeader = Score.OversCompleted.ToString() + "." + Score.ValidDeliveriesInOver.ToString();
@@ -43,10 +49,25 @@ namespace UmpireCounter
             }
         }
 
+        private string timeHeader = "Innings time: " + Score.InningsTime;
+        public string TimeHeader
+        {
+            get => timeHeader;
+            set
+            {
+                if (timeHeader != value)
+                {
+                    timeHeader = value;
+                    this.OnPropertyChanged("TimeHeader");
+                }
+            }
+        }
+
         void IncreaseOversClicked(object sender, EventArgs e)
         {
             Score.IncreaseBalls();
             SettingsPage.VibrateChecker();
+            Score.UpdateInningsTimer();
             UpdateDisplay();
         }
 
@@ -54,6 +75,7 @@ namespace UmpireCounter
         {
             Score.DecreaseBalls();
             SettingsPage.VibrateChecker();
+            Score.UpdateInningsTimer();
             UpdateDisplay();
         }
 
@@ -61,6 +83,7 @@ namespace UmpireCounter
         {
             Score.IncreaseWickets();
             SettingsPage.VibrateChecker();
+            Score.UpdateInningsTimer();
             UpdateDisplay();
         }
 
@@ -68,6 +91,7 @@ namespace UmpireCounter
         {
             Score.DecreaseWickets();
             SettingsPage.VibrateChecker();
+            Score.UpdateInningsTimer();
             UpdateDisplay();
         }
 
@@ -75,6 +99,7 @@ namespace UmpireCounter
         {
             Score.IncreaseTotal();
             SettingsPage.VibrateChecker();
+            Score.UpdateInningsTimer();
             UpdateDisplay();
         }
 
@@ -82,6 +107,7 @@ namespace UmpireCounter
         {
             Score.DecreaseTotal();
             SettingsPage.VibrateChecker();
+            Score.UpdateInningsTimer();
             UpdateDisplay();
         }
 
@@ -89,6 +115,16 @@ namespace UmpireCounter
         {
             OversHeader = Score.OversCompleted.ToString() + "." + Score.ValidDeliveriesInOver.ToString();
             ScoreHeader = Score.Total.ToString() + "-" + Score.Wickets.ToString();
+            TimeHeader = "Innings time: " + Score.InningsTime;
+
+            if (!SettingsPage.TimerOnOff)
+            {
+                TimeHeaderLabel.IsVisible = false;
+            }
+            else if (SettingsPage.TimerOnOff)
+            {
+                TimeHeaderLabel.IsVisible = true;
+            }
         }
 
         public async void ResetButtonClicked(object sender, EventArgs e)

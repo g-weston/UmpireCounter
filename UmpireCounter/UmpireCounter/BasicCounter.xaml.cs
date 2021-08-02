@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -9,10 +10,15 @@ namespace UmpireCounter
     {
         public BasicCounter()
         {
-            UpdateDisplay();
             InitializeComponent();
             BindingContext = this;
-            
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            UpdateDisplay();
+            DeviceDisplay.KeepScreenOn = true;
         }
 
         private string oversHeader = Score.OversCompleted.ToString() + "." + Score.ValidDeliveriesInOver.ToString();
@@ -29,10 +35,25 @@ namespace UmpireCounter
             }
         }
 
+        private string timeHeader = "Innings time: " + Score.InningsTime;
+        public string TimeHeader
+        {
+            get => timeHeader;
+            set
+            {
+                if (timeHeader != value)
+                {
+                    timeHeader = value;
+                    this.OnPropertyChanged("TimeHeader");
+                }
+            }
+        }
+
         void IncreaseOversClicked(object sender, EventArgs e)
         {
             Score.IncreaseBalls();
             SettingsPage.VibrateChecker();
+            Score.UpdateInningsTimer();
             UpdateDisplay();
         }
 
@@ -40,12 +61,23 @@ namespace UmpireCounter
         {
             Score.DecreaseBalls();
             SettingsPage.VibrateChecker();
+            Score.UpdateInningsTimer();
             UpdateDisplay();
         }
 
         void UpdateDisplay()
         {
             OversHeader = Score.OversCompleted.ToString() + "." + Score.ValidDeliveriesInOver.ToString();
+            TimeHeader = "Innings time: " + Score.InningsTime;
+
+            if (!SettingsPage.TimerOnOff)
+            {
+                TimeHeaderLabel.IsVisible = false;
+            }
+            else if (SettingsPage.TimerOnOff)
+            {
+                TimeHeaderLabel.IsVisible = true;
+            }
         }
 
         public async void ResetButtonClicked(object sender, EventArgs e)
@@ -53,7 +85,7 @@ namespace UmpireCounter
             bool resetConfirm = await DisplayAlert("Reset", "Are you sure you want to reset?", "Yes", "Cancel");
             if (resetConfirm)
             {
-                TextFileStorage.ResetScore(); 
+                TextFileStorage.ResetScore();
                 UpdateDisplay();
             }
         }

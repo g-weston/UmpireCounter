@@ -12,6 +12,9 @@ namespace UmpireCounter
         public static int ValidDeliveriesInOver { get; set; }
         public static int OversCompleted { get; set; }
         public static int BallsInOver { get; set; }
+        public static bool InningsInPlay { get; set; }
+        public static DateTime InningsStartTime { get; set; }
+        public static string InningsTime { get; set; }
 
         public static void IncreaseBalls()
         {
@@ -21,6 +24,12 @@ namespace UmpireCounter
             {
                 Score.OversCompleted++;
                 Score.ValidDeliveriesInOver = 0;
+            }
+
+            if (!Score.InningsInPlay)
+            {
+                Score.InningsStartTime = DateTime.Now;
+                Score.InningsInPlay = true;
             }
 
             TextFileStorage.WriteScore();
@@ -60,6 +69,7 @@ namespace UmpireCounter
             {
                 Score.Total = 0;
             }
+
             TextFileStorage.WriteScore();
         }
 
@@ -76,6 +86,7 @@ namespace UmpireCounter
             {
                 Score.Wickets = 0;
             }
+
             TextFileStorage.WriteScore();
         }
 
@@ -85,6 +96,13 @@ namespace UmpireCounter
             Score.Wickets = 0;
             Score.OversCompleted = 0;
             Score.ValidDeliveriesInOver = 0;
+            Score.InningsTime = "Innings hasn't started";
+            Score.InningsInPlay = false;
+        }
+
+        public static void UpdateInningsTimer()
+        {
+            Score.InningsTime = DateTime.Now.Subtract(Score.InningsStartTime).Minutes.ToString() + " minute(s)";
         }
     }
 }
