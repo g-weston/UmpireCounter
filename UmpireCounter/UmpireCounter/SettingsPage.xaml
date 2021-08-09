@@ -16,30 +16,33 @@
 
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="5"/>
-                <ColumnDefinition Width="2*"/>
-                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="5"/>
             </Grid.ColumnDefinitions>
 
             
             <Label Text="Balls in an over"
                    FontSize="Medium"
-                   HorizontalOptions="CenterAndExpand"
-                   VerticalOptions="CenterAndExpand"
+                   HorizontalTextAlignment="Center"
+                   HorizontalOptions="FillAndExpand"
+                   VerticalOptions="FillAndExpand"
                    Grid.Row="1"
                    Grid.Column="1"/>
 
             <Label Text="Vibrate on button click"
                    FontSize="Medium"
-                   HorizontalOptions="CenterAndExpand"
-                   VerticalOptions="CenterAndExpand"
+                   HorizontalTextAlignment="Center"
+                   HorizontalOptions="FillAndExpand"
+                   VerticalOptions="FillAndExpand"
                    Grid.Row="2"
                    Grid.Column="1"/>
 
             <Label Text="Innings Timer"
                    FontSize="Medium"
-                   HorizontalOptions="CenterAndExpand"
-                   VerticalOptions="CenterAndExpand"
+                   HorizontalTextAlignment="Center"
+                   HorizontalOptions="FillAndExpand"
+                   VerticalOptions="FillAndExpand"
                    Grid.Row="3"
                    Grid.Column="1"/>
 

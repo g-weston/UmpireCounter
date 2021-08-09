@@ -50,34 +50,64 @@ namespace UmpireCounter
         {
             bool ballNumber = false;
             bool oversZero = false;
-            if (int.TryParse(EntryBallsInOver.Text, out int ballsNumOver) && (int.Parse(EntryBallsInOver.Text) >= 1))
+            bool updateBalls = false;
+            bool errorUpdate = false;
+            if (int.TryParse(EntryBallsInOver.Text, out int ballsNumOver))
             {
-                ballNumber = true;
+
+                if (ballsNumOver != Score.BallsInOver)
+                {
+                    if (ballsNumOver >= 1)
+                    {
+
+                        ballNumber = true;
+                        if (Score.OversCompleted == 0 && Score.ValidDeliveriesInOver == 0)
+                        {
+                            oversZero = true;
+                        }
+                        else
+                        {
+                            errorUpdate = true;
+                            await DisplayAlert("Error",
+                                "Innings currently in progress, please reset the innings before changing the number of balls in an over",
+                                "Ok");
+                        }
+
+                    }
+                }
+                else
+                {
+                    updateBalls = false;
+                }
+            }
+            else if (String.IsNullOrWhiteSpace(EntryBallsInOver.Text))
+            {
+                updateBalls = false;
             }
             else
             {
+                errorUpdate = false;
                 await DisplayAlert("Error",
                     "Please enter a valid number (more than 0) in the number of balls in an over entry.", "Ok");
             }
 
-            if (Score.OversCompleted == 0 && Score.ValidDeliveriesInOver == 0)
-            {
-                oversZero = true;
-            }
-            else
-            {
-                await DisplayAlert("Error",
-                    "Innings currently in progress, please reset the innings before changing the number of balls in an over",
-                    "Ok");
-            }
-
             if (ballNumber && oversZero)
             {
+                updateBalls = true;
+            }
+            
+            if (updateBalls)
+            {
                 Score.BallsInOver = ballsNumOver;
+            }
+
+            if (!errorUpdate)
+            {
                 TextFileStorage.WriteSettings();
                 await DisplayAlert("Settings",
                     "Your settings have been updated.", "Ok");
             }
+            
         }
 
         public static void VibrateChecker()
