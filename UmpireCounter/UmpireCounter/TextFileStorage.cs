@@ -108,6 +108,7 @@ namespace UmpireCounter
                 Score.BallsInOver = 6;
                 SettingsPage.Vibrate = true;
                 SettingsPage.TimerOnOff = true;
+                SettingsPage.LoadInPage = false;
                 TextFileStorage.WriteSettings();
             }
             else
@@ -145,12 +146,22 @@ namespace UmpireCounter
                     {
                         Score.BallsInOver = ballsOver;
                     }
+
+                    if (fileSettingsContents[3] == "True")
+                    {
+                        SettingsPage.LoadInPage = true;
+                    }
+                    else if (fileSettingsContents[3] == "False")
+                    {
+                        SettingsPage.LoadInPage = false;
+                    }
                 }
                 else
                 {
                     Score.BallsInOver = 6;
                     SettingsPage.Vibrate = true;
                     SettingsPage.TimerOnOff = true;
+                    SettingsPage.LoadInPage = false;
                     TextFileStorage.WriteSettings();
                 }
                 
@@ -167,6 +178,7 @@ namespace UmpireCounter
                 fileSettingsWrite.WriteLine(SettingsPage.Vibrate.ToString());
                 fileSettingsWrite.WriteLine(Score.BallsInOver.ToString());
                 fileSettingsWrite.WriteLine(SettingsPage.TimerOnOff.ToString());
+                fileSettingsWrite.WriteLine(SettingsPage.LoadInPage.ToString());
 
                 fileSettingsWrite.Flush();
                 fileSettingsWrite.Close();

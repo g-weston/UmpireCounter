@@ -10,9 +10,10 @@ namespace UmpireCounter
         public App()
         {
             InitializeComponent();
-            MainPage = new AppShell();
             TextFileStorage.ReadScore();
             TextFileStorage.ReadSettings();
+            MainPage = new AppShell();
+            
         }
 
         protected override void OnStart()

@@ -7,16 +7,19 @@
     <ContentPage.Content>
         <Grid   VerticalOptions="FillAndExpand">
             <Grid.RowDefinitions>
-                <RowDefinition Height="6*"/>
+                <RowDefinition Height="5"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
-                <RowDefinition Height="6*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="10*"/>
             </Grid.RowDefinitions>
 
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="5"/>
-                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="2*"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="5"/>
             </Grid.ColumnDefinitions>
@@ -28,7 +31,8 @@
                    HorizontalOptions="FillAndExpand"
                    VerticalOptions="FillAndExpand"
                    Grid.Row="1"
-                   Grid.Column="1"/>
+                   Grid.Column="1"
+                   Grid.ColumnSpan="2"/>
 
             <Label Text="Vibrate on button click"
                    FontSize="Medium"
@@ -36,7 +40,8 @@
                    HorizontalOptions="FillAndExpand"
                    VerticalOptions="FillAndExpand"
                    Grid.Row="2"
-                   Grid.Column="1"/>
+                   Grid.Column="1"
+                   Grid.ColumnSpan="2"/>
 
             <Label Text="Innings Timer"
                    FontSize="Medium"
@@ -44,7 +49,8 @@
                    HorizontalOptions="FillAndExpand"
                    VerticalOptions="FillAndExpand"
                    Grid.Row="3"
-                   Grid.Column="1"/>
+                   Grid.Column="1"
+                   Grid.ColumnSpan="2"/>
 
             <Entry x:Name="EntryBallsInOver" 
                    ClearButtonVisibility="WhileEditing"
@@ -52,7 +58,7 @@
                    TextColor="Gray"
                    Keyboard="Numeric"
                    Grid.Row="1"
-                   Grid.Column="2"/>
+                   Grid.Column="3"/>
 
             <Switch Toggled="VibrateButtonsSwitch"
                     IsToggled="True"
@@ -60,7 +66,7 @@
                     OnColor="{StaticResource Primary}"
                     HorizontalOptions="Center" 
                     Grid.Row="2" 
-                    Grid.Column="2"/>
+                    Grid.Column="3"/>
 
             <Switch Toggled="TimerButtonsSwitch"
                     IsToggled="True"
@@ -68,16 +74,49 @@
                     OnColor="{StaticResource Primary}"
                     HorizontalOptions="Center" 
                     Grid.Row="3" 
-                    Grid.Column="2"/>
+                    Grid.Column="3"/>
+
+            <Label Text="Load in page:"
+                   FontSize="Medium"
+                   HorizontalTextAlignment="Center"
+                   HorizontalOptions="FillAndExpand"
+                   VerticalOptions="FillAndExpand"
+                   Grid.Row="4"
+                   Grid.Column="1"
+                   Grid.ColumnSpan="3"/>
+
+            <Label Text="Basic Counter"
+                   FontSize="Medium"
+                   HorizontalTextAlignment="Center"
+                   HorizontalOptions="FillAndExpand"
+                   VerticalOptions="FillAndExpand"
+                   Grid.Row="5"
+                   Grid.Column="1" />
+
+            <Label Text="Advanced Counter"
+                   FontSize="Medium"
+                   HorizontalTextAlignment="Center"
+                   HorizontalOptions="FillAndExpand"
+                   VerticalOptions="FillAndExpand"
+                   Grid.Row="5"
+                   Grid.Column="3" />
+
+            <Switch Toggled="LoadInPageSwitch"
+                    IsToggled="True"
+                    ThumbColor="Gray"
+                    OnColor="{StaticResource Primary}"
+                    HorizontalOptions="Center" 
+                    Grid.Row="5" 
+                    Grid.Column="2" />
 
             <Button Text="Update"
                     TextColor="{StaticResource Secondary}"
                     Clicked="UpdateSettingsClicked"
-                    VerticalOptions="CenterAndExpand"
+                    VerticalOptions="StartAndExpand"
                     HorizontalOptions="CenterAndExpand"
-                    Grid.Row="4"
+                    Grid.Row="6"
                     Grid.Column="1"
-                    Grid.ColumnSpan="2"/>
+                    Grid.ColumnSpan="3"/>
         </Grid>
     </ContentPage.Content>
 </ContentPage>

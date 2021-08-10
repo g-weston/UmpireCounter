@@ -78,16 +78,19 @@
         FlyoutDisplayOptions="AsMultipleItems" will create a separate flyout item for each child element    
         https://docs.microsoft.com/dotnet/api/xamarin.forms.shellgroupitem.flyoutdisplayoptions?view=xamarin-forms
     -->
+    
     <FlyoutItem Title="Basic Counter" >
-        <ShellContent Route="BasicCounter" ContentTemplate="{DataTemplate local:BasicCounter}" />
+        <ShellContent x:Name="BasicCounterTab" Route="BasicCounter" ContentTemplate="{DataTemplate local:BasicCounter}" />
     </FlyoutItem>
+    
     <FlyoutItem Title="Advanced Counter">
-        <ShellContent Route="AdvancedCounter" ContentTemplate="{DataTemplate local:AdvancedCounter}" />
+        <ShellContent x:Name="AdvancedCounterTab" Route="AdvancedCounter" ContentTemplate="{DataTemplate local:AdvancedCounter}" />
     </FlyoutItem>
 
     <FlyoutItem Title="Settings">
-        <ShellContent Route="SettingsPage" ContentTemplate="{DataTemplate local:SettingsPage}" />
+        <ShellContent x:Name="SettingsTab" Route="SettingsPage" ContentTemplate="{DataTemplate local:SettingsPage}" />
     </FlyoutItem>
+    
     <!-- When the Flyout is visible this will be a menu item you can tie a click behavior to  -->
     <!--
     <MenuItem Text="About" StyleClass="MenuItemLayoutStyle" Clicked="AboutButtonClicked">
@@ -154,7 +157,7 @@
                 <Button TextColor="{StaticResource Secondary}"
                         Text="About"
                         Clicked="AboutButtonClicked"/>
-                <Label Text="Version 0.2"
+                <Label Text="Version 0.4"
                        TextColor="{StaticResource Secondary}"
                        HorizontalTextAlignment="Center"/>
                 <BoxView Color="{StaticResource Primary}"

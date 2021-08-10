@@ -10,6 +10,16 @@ namespace UmpireCounter
         public AppShell()
         {
             InitializeComponent();
+
+            if (SettingsPage.LoadInPage)
+            {
+                CurrentItem = AdvancedCounterTab;
+            }
+            else if (!SettingsPage.LoadInPage)
+            {
+                CurrentItem = BasicCounterTab;
+            }
+            
         }
 
         private async void AboutButtonClicked(object sender, EventArgs e)

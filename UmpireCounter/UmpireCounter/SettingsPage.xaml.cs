@@ -33,6 +33,7 @@ namespace UmpireCounter
 
         public static bool Vibrate { get; set; }
         public static bool TimerOnOff { get; set; }
+        public static bool LoadInPage { get; set; }
 
         void VibrateButtonsSwitch(object sender, ToggledEventArgs e)
         {
@@ -44,6 +45,12 @@ namespace UmpireCounter
         {
             if (e.Value) SettingsPage.TimerOnOff = true;
             if (!e.Value) SettingsPage.TimerOnOff = false;
+        }
+
+        void LoadInPageSwitch(object sender, ToggledEventArgs e)
+        {
+            if (e.Value) SettingsPage.LoadInPage = true;
+            if (!e.Value) SettingsPage.LoadInPage = false;
         }
 
         private async void UpdateSettingsClicked(object sender, System.EventArgs e)
