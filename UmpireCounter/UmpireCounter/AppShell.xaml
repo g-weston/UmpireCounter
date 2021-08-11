@@ -157,7 +157,7 @@
                 <Button TextColor="{StaticResource Secondary}"
                         Text="About"
                         Clicked="AboutButtonClicked"/>
-                <Label Text="Version 0.4"
+                <Label Text="Version 0.5"
                        TextColor="{StaticResource Secondary}"
                        HorizontalTextAlignment="Center"/>
                 <BoxView Color="{StaticResource Primary}"

@@ -122,8 +122,9 @@ namespace UmpireCounter
                     fileSettingsContents.Add(line);
                 }
                 fileSettingsRead.Dispose();
-                if (fileSettingsContents.Count != 0)
+                if (fileSettingsContents.Count == 4)
                 {
+                                        
                     if (fileSettingsContents[0] == "True")
                     {
                         SettingsPage.Vibrate = true;

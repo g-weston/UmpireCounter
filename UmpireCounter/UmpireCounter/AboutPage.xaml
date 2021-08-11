@@ -32,7 +32,7 @@
                        HorizontalTextAlignment="Center"
                        Grid.Row="1" 
                        Grid.Column="1"/>
-                <Label Text="Version 0.4"
+                <Label Text="Version 0.5"
                        VerticalOptions="CenterAndExpand"
                        HorizontalOptions="CenterAndExpand"
                        FontSize="Small"
