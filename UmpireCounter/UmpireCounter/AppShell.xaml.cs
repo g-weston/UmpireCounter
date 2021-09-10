@@ -19,7 +19,20 @@ namespace UmpireCounter
             {
                 CurrentItem = BasicCounterTab;
             }
-            
+
+            /*Shell.SetBackButtonBehavior(this, new BackButtonBehavior
+            {
+                Command = new Command(() =>
+                {
+                    await Shell.Current.GoToAsync("..");
+                }),
+            });*/
+
+        }
+
+        public async void BackCommand()
+        {
+            await Shell.Current.GoToAsync("..");
         }
 
         private async void AboutButtonClicked(object sender, EventArgs e)

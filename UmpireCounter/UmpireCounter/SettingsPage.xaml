@@ -54,22 +54,19 @@
 
             <Entry x:Name="EntryBallsInOver" 
                    ClearButtonVisibility="WhileEditing"
-                   Placeholder="{Binding BallsInOverPlaceHolder}"
                    TextColor="Gray"
                    Keyboard="Numeric"
                    Grid.Row="1"
                    Grid.Column="3"/>
 
-            <Switch Toggled="VibrateButtonsSwitch"
-                    IsToggled="True"
+            <Switch x:Name="VibrateSwitch"
                     ThumbColor="Gray"
                     OnColor="{StaticResource Primary}"
                     HorizontalOptions="Center" 
                     Grid.Row="2" 
                     Grid.Column="3"/>
 
-            <Switch Toggled="TimerButtonsSwitch"
-                    IsToggled="True"
+            <Switch x:Name="TimerSwitch"
                     ThumbColor="Gray"
                     OnColor="{StaticResource Primary}"
                     HorizontalOptions="Center" 
@@ -101,8 +98,7 @@
                    Grid.Row="5"
                    Grid.Column="3" />
 
-            <Switch Toggled="LoadInPageSwitch"
-                    IsToggled="True"
+            <Switch  x:Name="LoadBasicAdvancedSwitch"
                     ThumbColor="Gray"
                     OnColor="{StaticResource Primary}"
                     HorizontalOptions="Center" 
@@ -119,4 +115,9 @@
                     Grid.ColumnSpan="3"/>
         </Grid>
     </ContentPage.Content>
+
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior Command="{Binding BackCommand}" />
+    </Shell.BackButtonBehavior>
+    
 </ContentPage>

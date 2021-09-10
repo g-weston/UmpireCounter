@@ -17,42 +17,16 @@ namespace UmpireCounter
             InitializeComponent();
         }
 
-        private string ballsInOverPlaceHolder = Score.BallsInOver.ToString();
-        public string BallsInOverPlaceHolder
+        protected override void OnAppearing()
         {
-            get => ballsInOverPlaceHolder;
-            set
-            {
-                if (ballsInOverPlaceHolder != value)
-                {
-                    ballsInOverPlaceHolder = value;
-                    this.OnPropertyChanged("BallsInOverPlaceHolder");
-                }
-            }
+            base.OnAppearing();
+            UpdateSettingsDisplay();
         }
-
+                
         public static bool Vibrate { get; set; }
         public static bool TimerOnOff { get; set; }
         public static bool LoadInPage { get; set; }
-
-        void VibrateButtonsSwitch(object sender, ToggledEventArgs e)
-        {
-            if (e.Value) SettingsPage.Vibrate = true;
-            if (!e.Value) SettingsPage.Vibrate = false;
-        }
-
-        void TimerButtonsSwitch(object sender, ToggledEventArgs e)
-        {
-            if (e.Value) SettingsPage.TimerOnOff = true;
-            if (!e.Value) SettingsPage.TimerOnOff = false;
-        }
-
-        void LoadInPageSwitch(object sender, ToggledEventArgs e)
-        {
-            if (e.Value) SettingsPage.LoadInPage = true;
-            if (!e.Value) SettingsPage.LoadInPage = false;
-        }
-
+        
         private async void UpdateSettingsClicked(object sender, System.EventArgs e)
         {
             bool ballNumber = false;
@@ -110,11 +84,21 @@ namespace UmpireCounter
 
             if (!errorUpdate)
             {
+                if (VibrateSwitch.IsToggled) SettingsPage.Vibrate = true;
+                else SettingsPage.Vibrate = false;
+
+                if (TimerSwitch.IsToggled) SettingsPage.TimerOnOff = true;
+                else SettingsPage.TimerOnOff = false;
+
+                if (LoadBasicAdvancedSwitch.IsToggled) SettingsPage.LoadInPage = true;
+                else SettingsPage.LoadInPage = false;
+
                 TextFileStorage.WriteSettings();
                 await DisplayAlert("Settings",
                     "Your settings have been updated.", "Ok");
             }
-            
+
+            UpdateSettingsDisplay();
         }
 
         public static void VibrateChecker()
@@ -124,6 +108,43 @@ namespace UmpireCounter
                 var duration = TimeSpan.FromSeconds(0.1);
                 Vibration.Vibrate(duration);
             }
+        }
+
+        public void UpdateSettingsDisplay()
+        {
+            if (SettingsPage.Vibrate)
+            {
+                VibrateSwitch.IsToggled = true;
+            }
+            else
+            {
+                VibrateSwitch.IsToggled = false;
+            }
+
+            if (SettingsPage.TimerOnOff)
+            {
+                TimerSwitch.IsToggled = true;
+            }
+            else
+            {
+                TimerSwitch.IsToggled = false;
+            }
+
+            if (SettingsPage.LoadInPage)
+            {
+                LoadBasicAdvancedSwitch.IsToggled = true;
+            }
+            else
+            {
+                LoadBasicAdvancedSwitch.IsToggled = false;
+            }
+
+            EntryBallsInOver.Placeholder = Score.BallsInOver.ToString();
+        }
+
+        public async void BackCommand()
+        {
+            await Shell.Current.GoToAsync("..");
         }
     }
 }

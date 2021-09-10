@@ -13,7 +13,7 @@ namespace UmpireCounter
             TextFileStorage.ReadScore();
             TextFileStorage.ReadSettings();
             MainPage = new AppShell();
-            
+            //Score.AnyButtonPressed = false;
         }
 
         protected override void OnStart()

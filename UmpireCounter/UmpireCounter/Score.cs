@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Dynamic;
 using System.Text;
+using System.Timers;
 
 namespace UmpireCounter
 {
@@ -15,7 +16,21 @@ namespace UmpireCounter
         public static bool InningsInPlay { get; set; }
         public static DateTime InningsStartTime { get; set; }
         public static string InningsTime { get; set; }
+        public static TimeSpan TimeSinceTimerUpdate { get; set; }
+        public static DateTime TimeLastUpdated { get; set; }
+        public static bool AnyButtonPressed { get; set; }
+        public static bool TimeChanged { get; set; }
+        public static Timer inningsTimerCheckerTimer;
 
+        /*public static void CheckingTimer()
+        {
+            inningsTimerCheckerTimer = new System.Timers.Timer();
+            inningsTimerCheckerTimer.Interval = 30000;
+            inningsTimerCheckerTimer.Elapsed += Score.CheckUpdateTimer;
+            inningsTimerCheckerTimer.AutoReset = true;
+            inningsTimerCheckerTimer.Enabled = true;
+        }
+        */
         public static void IncreaseBalls()
         {
             Score.ValidDeliveriesInOver++;
@@ -30,6 +45,7 @@ namespace UmpireCounter
             {
                 Score.InningsStartTime = DateTime.Now;
                 Score.InningsInPlay = true;
+                //Score.CheckingTimer();
             }
 
             TextFileStorage.WriteScore();
@@ -103,6 +119,17 @@ namespace UmpireCounter
         public static void UpdateInningsTimer()
         {
             Score.InningsTime = DateTime.Now.Subtract(Score.InningsStartTime).Minutes.ToString() + " minute(s)";
+            Score.TimeLastUpdated = DateTime.Now;
+        }
+
+        public static void CheckUpdateTimer(/*Object source, System.Timers.ElapsedEventArgs e*/)
+        {
+            int minutesSinceUpdate = DateTime.Now.Subtract(Score.TimeLastUpdated).Minutes;
+            if (minutesSinceUpdate >= 1)
+            {
+                Score.TimeChanged = true;
+                Score.UpdateInningsTimer();
+            }
         }
     }
 }

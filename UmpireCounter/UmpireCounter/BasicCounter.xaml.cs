@@ -1,5 +1,6 @@
 ﻿using System;
 using System.ComponentModel;
+using System.Timers;
 using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -21,6 +22,8 @@ namespace UmpireCounter
             DeviceDisplay.KeepScreenOn = true;
         }
 
+        private static Timer inningsTimerCheckerTimer;
+        
         private string oversHeader = Score.OversCompleted.ToString() + "." + Score.ValidDeliveriesInOver.ToString();
         public string OversHeader
         {
@@ -51,19 +54,35 @@ namespace UmpireCounter
 
         void IncreaseOversClicked(object sender, EventArgs e)
         {
+            //Score.AnyButtonPressed = true;
+            if (!Score.InningsInPlay)
+            {
+                inningsTimerCheckerTimer = new System.Timers.Timer();
+                inningsTimerCheckerTimer.Interval = 30000;
+                inningsTimerCheckerTimer.AutoReset = true;
+                inningsTimerCheckerTimer.Enabled = true;
+                inningsTimerCheckerTimer.Elapsed += UpdateBasicCounterTimer;
+            }
             Score.IncreaseBalls();
             SettingsPage.VibrateChecker();
             Score.UpdateInningsTimer();
+            //Score.AnyButtonPressed = false;
             UpdateDisplay();
+            
         }
 
         void DecreaseOversClicked(object sender, EventArgs e)
         {
+            //Score.AnyButtonPressed = true;
             Score.DecreaseBalls();
             SettingsPage.VibrateChecker();
             Score.UpdateInningsTimer();
+            //Score.AnyButtonPressed = false;
             UpdateDisplay();
+            
         }
+
+        
 
         void UpdateDisplay()
         {
@@ -77,6 +96,25 @@ namespace UmpireCounter
             else if (SettingsPage.TimerOnOff)
             {
                 TimeHeaderLabel.IsVisible = true;
+            }
+            /*
+            inningsTimerCheckerTimer = new System.Timers.Timer();
+            inningsTimerCheckerTimer.Interval = 45000;
+            inningsTimerCheckerTimer.Elapsed += UpdateBasicCounterTimer;
+            inningsTimerCheckerTimer.AutoReset = true;
+            inningsTimerCheckerTimer.Enabled = true;
+                */
+            
+        }
+
+        public void UpdateBasicCounterTimer(Object source, System.Timers.ElapsedEventArgs e)
+        {
+            //TimeHeader = "Innings time: " + Score.InningsTime;
+            Score.CheckUpdateTimer();
+            if (Score.TimeChanged)
+            {
+                UpdateDisplay();
+                Score.TimeChanged = false;
             }
         }
 

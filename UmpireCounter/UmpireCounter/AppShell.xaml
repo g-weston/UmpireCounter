@@ -165,6 +165,9 @@
             </StackLayout>
         </DataTemplate>
     </Shell.FlyoutFooterTemplate>
-    
+
+    <Shell.BackButtonBehavior>
+        <BackButtonBehavior Command="{Binding BackCommand}" />
+    </Shell.BackButtonBehavior>
 
 </Shell>
