@@ -26,7 +26,9 @@ namespace UmpireCounter
         public static bool Vibrate { get; set; }
         public static bool TimerOnOff { get; set; }
         public static bool LoadInPage { get; set; }
-        
+        public static bool DisplayWickets { get; set; }
+        public static bool DisplayRuns { get; set; }
+
         private async void UpdateSettingsClicked(object sender, System.EventArgs e)
         {
             bool ballNumber = false;
@@ -90,8 +92,11 @@ namespace UmpireCounter
                 if (TimerSwitch.IsToggled) SettingsPage.TimerOnOff = true;
                 else SettingsPage.TimerOnOff = false;
 
-                if (LoadBasicAdvancedSwitch.IsToggled) SettingsPage.LoadInPage = true;
-                else SettingsPage.LoadInPage = false;
+                if (DisplayRunsSwitch.IsToggled) SettingsPage.DisplayRuns = true;
+                else SettingsPage.DisplayRuns = false;
+
+                if (DisplayWicketsSwitch.IsToggled) SettingsPage.DisplayWickets = true;
+                else SettingsPage.DisplayWickets = false;
 
                 TextFileStorage.WriteSettings();
                 await DisplayAlert("Settings",
@@ -130,13 +135,22 @@ namespace UmpireCounter
                 TimerSwitch.IsToggled = false;
             }
 
-            if (SettingsPage.LoadInPage)
+            if (SettingsPage.DisplayRuns)
             {
-                LoadBasicAdvancedSwitch.IsToggled = true;
+                DisplayRunsSwitch.IsToggled = true;
             }
             else
             {
-                LoadBasicAdvancedSwitch.IsToggled = false;
+                DisplayRunsSwitch.IsToggled = false;
+            }
+
+            if (SettingsPage.DisplayWickets)
+            {
+                DisplayWicketsSwitch.IsToggled = true;
+            }
+            else
+            {
+                DisplayWicketsSwitch.IsToggled = false;
             }
 
             EntryBallsInOver.Placeholder = Score.BallsInOver.ToString();

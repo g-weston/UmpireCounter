@@ -45,7 +45,6 @@ namespace UmpireCounter
             {
                 Score.InningsStartTime = DateTime.Now;
                 Score.InningsInPlay = true;
-                //Score.CheckingTimer();
             }
 
             TextFileStorage.WriteScore();
@@ -76,6 +75,12 @@ namespace UmpireCounter
         {
             Score.Total++;
             TextFileStorage.WriteScore();
+
+            if (!Score.InningsInPlay)
+            {
+                Score.InningsStartTime = DateTime.Now;
+                Score.InningsInPlay = true;
+            }
         }
 
         public static void DecreaseTotal()
@@ -93,6 +98,12 @@ namespace UmpireCounter
         {
             Score.Wickets++;
             TextFileStorage.WriteScore();
+
+            if (!Score.InningsInPlay)
+            {
+                Score.InningsStartTime = DateTime.Now;
+                Score.InningsInPlay = true;
+            }
         }
 
         public static void DecreaseWickets()
@@ -122,13 +133,16 @@ namespace UmpireCounter
             Score.TimeLastUpdated = DateTime.Now;
         }
 
-        public static void CheckUpdateTimer(/*Object source, System.Timers.ElapsedEventArgs e*/)
+        public static void CheckUpdateTimer()
         {
-            int minutesSinceUpdate = DateTime.Now.Subtract(Score.TimeLastUpdated).Minutes;
-            if (minutesSinceUpdate >= 1)
+            if (Score.InningsTime != "Innings hasn't started")
             {
-                Score.TimeChanged = true;
-                Score.UpdateInningsTimer();
+                int minutesSinceUpdate = DateTime.Now.Subtract(Score.TimeLastUpdated).Minutes;
+                if (minutesSinceUpdate >= 1)
+                {
+                    Score.TimeChanged = true;
+                    Score.UpdateInningsTimer();
+                }
             }
         }
     }

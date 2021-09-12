@@ -11,9 +11,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="BasicCounter.xaml.cs">
-      <DependentUpon>BasicCounter.xaml</DependentUpon>
-    </Compile>
     <Compile Update="AdvancedCounter.xaml.cs">
       <DependentUpon>AdvancedCounter.xaml</DependentUpon>
     </Compile>

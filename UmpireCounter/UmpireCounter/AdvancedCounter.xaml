@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="UmpireCounter.AdvancedCounter"
-             Title="Advanced Counter">
+             Title="Counter">
 
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Reset" Clicked="ResetButtonClicked"/>
@@ -26,19 +26,17 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <Label Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="0" Text="{Binding ScoreHeader}" FontSize="Header" TextColor="DodgerBlue" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" />
-        <Label Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="1" Text="{Binding OversHeader }" FontSize="Header" TextColor="DodgerBlue" HorizontalTextAlignment="Center" VerticalTextAlignment="Start" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" />
+        <Label Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="0" x:Name="ScoreHeaderLabel" Text="{Binding ScoreHeader}" FontSize="Header" TextColor="DodgerBlue" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" />
+        <Label Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="1" x:Name="OversHeaderLabel" Text="{Binding OversHeader }" FontSize="Header" TextColor="DodgerBlue" HorizontalTextAlignment="Center" VerticalTextAlignment="Start" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" />
         <Label Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="0" x:Name="TimeHeaderLabel" Text="{Binding TimeHeader}" FontSize="Small" TextColor="DodgerBlue" HorizontalTextAlignment="End" VerticalTextAlignment="Start" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" IsVisible="true" />
-        <Label Grid.Column="1" Grid.Row="2" Text="Runs" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="Large" TextColor="DodgerBlue" />
-        <Button Grid.Column="0" Grid.Row="2" Text="-" FontSize="Large" Clicked="DecreaseTotalClicked" CornerRadius="25" BorderColor="{StaticResource Secondary}" BorderWidth="5"/>
-        <Button Grid.Column="2" Grid.Row="2" Text="+" FontSize="Large" Clicked="IncreaseTotalClicked" CornerRadius="25" BorderColor="{StaticResource Secondary}" BorderWidth="5"/>
-        <Label Grid.Column="1" Grid.Row="3" Text="Wickets" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="Large" TextColor="DodgerBlue" />
-        <Button Grid.Column="0" Grid.Row="3" Text="-" FontSize="Large" Clicked="DecreaseWicketsClicked" CornerRadius="25" BorderColor="{StaticResource Secondary}" BorderWidth="5"/>
-        <Button Grid.Column="2" Grid.Row="3" Text="+" FontSize="Large" Clicked="IncreaseWicketsClicked" CornerRadius="25" BorderColor="{StaticResource Secondary}" BorderWidth="5"/>
+        <Label Grid.Column="1" Grid.Row="2" Text="Runs" x:Name="RunsLabel" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="Large" TextColor="DodgerBlue" />
+        <Button Grid.Column="0" Grid.Row="2" Text="-" x:Name="RunsDecreaseButton" FontSize="Large" Clicked="DecreaseTotalClicked" CornerRadius="25" BorderColor="{StaticResource Secondary}" BorderWidth="5"/>
+        <Button Grid.Column="2" Grid.Row="2" Text="+" x:Name="RunsIncreaseButton" FontSize="Large" Clicked="IncreaseTotalClicked" CornerRadius="25" BorderColor="{StaticResource Secondary}" BorderWidth="5"/>
+        <Label Grid.Column="1" Grid.Row="3" Text="Wickets" x:Name="WicketsLabel" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="Large" TextColor="DodgerBlue" />
+        <Button Grid.Column="0" Grid.Row="3" Text="-" x:Name="WicketsDecreaseButton" FontSize="Large" Clicked="DecreaseWicketsClicked" CornerRadius="25" BorderColor="{StaticResource Secondary}" BorderWidth="5"/>
+        <Button Grid.Column="2" Grid.Row="3" Text="+" x:Name="WicketsIncreaseButton" FontSize="Large" Clicked="IncreaseWicketsClicked" CornerRadius="25" BorderColor="{StaticResource Secondary}" BorderWidth="5"/>
         <Label Grid.Column="1" Grid.Row="4" Text="Balls Bowled" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="Large" TextColor="DodgerBlue" />
         <Button Grid.Column="0" Grid.Row="4" Text="-" FontSize="Large" Clicked="DecreaseOversClicked" CornerRadius="25" BorderColor="{StaticResource Secondary}" BorderWidth="5"/>
         <Button Grid.Column="2" Grid.Row="4" Text="+" FontSize="Large" Clicked="IncreaseOversClicked" CornerRadius="25" BorderColor="{StaticResource Secondary}" BorderWidth="5"/>
     </Grid>
 </ContentPage>
-
-<!--xmlns:model="clr-namespace:UmpireCounter.Models" -->

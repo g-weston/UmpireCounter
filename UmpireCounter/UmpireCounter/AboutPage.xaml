@@ -25,14 +25,14 @@
                        TextColor="{StaticResource Primary}"
                        Grid.Row="0"
                        Grid.Column="1"/>
-                <Label Text="Cricket umpire counting app for use in real matches to aid umpires. Two separate levels of counting available giving you choice of what you want to track!"
+                <Label Text="Cricket umpire counting app for use in real matches to aid umpires. Customisable level of counting available giving you choice of what you want to track!"
                        VerticalOptions="CenterAndExpand"
                        HorizontalOptions="CenterAndExpand"
                        FontSize="Medium"
                        HorizontalTextAlignment="Center"
                        Grid.Row="1" 
                        Grid.Column="1"/>
-                <Label Text="Version 0.5"
+                <Label Text="Version 0.6"
                        VerticalOptions="CenterAndExpand"
                        HorizontalOptions="CenterAndExpand"
                        FontSize="Small"

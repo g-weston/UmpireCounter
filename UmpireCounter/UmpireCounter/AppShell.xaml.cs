@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 //using UmpireCounter.ViewModels;
 using Xamarin.Forms;
 
@@ -10,31 +11,34 @@ namespace UmpireCounter
         public AppShell()
         {
             InitializeComponent();
-
-            if (SettingsPage.LoadInPage)
-            {
-                CurrentItem = AdvancedCounterTab;
-            }
-            else if (!SettingsPage.LoadInPage)
-            {
-                CurrentItem = BasicCounterTab;
-            }
-
-            /*Shell.SetBackButtonBehavior(this, new BackButtonBehavior
-            {
-                Command = new Command(() =>
-                {
-                    await Shell.Current.GoToAsync("..");
-                }),
-            });*/
-
+            
         }
-
-        public async void BackCommand()
+        
+        protected override bool OnBackButtonPressed()
         {
-            await Shell.Current.GoToAsync("..");
+            NavigateBackCounter();
+            return true;
+        }
+        
+        public async void NavigateBackCounter()
+        {
+            await Shell.Current.GoToAsync("////SettingsPage");
+            await Shell.Current.GoToAsync("////AdvancedCounter");
         }
 
+        /*
+        protected override bool OnBackButtonPressed()
+        {
+            var page = (Shell.Current?.CurrentItem?.CurrentItem as IShellSectionController)?.PresentedPage;
+            if (page.SendBackButtonPressed())
+            {
+                NavigateBackCounter();
+                return true;
+            }
+            else
+                return base.OnBackButtonPressed();
+        }*/
+        
         private async void AboutButtonClicked(object sender, EventArgs e)
         {
             Shell.Current.FlyoutIsPresented = false;

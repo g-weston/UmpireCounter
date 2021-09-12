@@ -73,37 +73,37 @@
                     Grid.Row="3" 
                     Grid.Column="3"/>
 
-            <Label Text="Load in page:"
+            <Label Text="Display Runs Counter"
                    FontSize="Medium"
                    HorizontalTextAlignment="Center"
                    HorizontalOptions="FillAndExpand"
                    VerticalOptions="FillAndExpand"
                    Grid.Row="4"
                    Grid.Column="1"
-                   Grid.ColumnSpan="3"/>
+                   Grid.ColumnSpan="2"/>
 
-            <Label Text="Basic Counter"
+            <Switch  x:Name="DisplayRunsSwitch"
+                    ThumbColor="Gray"
+                    OnColor="{StaticResource Primary}"
+                    HorizontalOptions="Center" 
+                    Grid.Row="4" 
+                    Grid.Column="3" />
+
+            <Label Text="Display Wickets Counter"
                    FontSize="Medium"
                    HorizontalTextAlignment="Center"
                    HorizontalOptions="FillAndExpand"
                    VerticalOptions="FillAndExpand"
                    Grid.Row="5"
-                   Grid.Column="1" />
+                   Grid.Column="1" 
+                   Grid.ColumnSpan="2"/>
 
-            <Label Text="Advanced Counter"
-                   FontSize="Medium"
-                   HorizontalTextAlignment="Center"
-                   HorizontalOptions="FillAndExpand"
-                   VerticalOptions="FillAndExpand"
-                   Grid.Row="5"
-                   Grid.Column="3" />
-
-            <Switch  x:Name="LoadBasicAdvancedSwitch"
+            <Switch  x:Name="DisplayWicketsSwitch"
                     ThumbColor="Gray"
                     OnColor="{StaticResource Primary}"
                     HorizontalOptions="Center" 
                     Grid.Row="5" 
-                    Grid.Column="2" />
+                    Grid.Column="3" />
 
             <Button Text="Update"
                     TextColor="{StaticResource Secondary}"

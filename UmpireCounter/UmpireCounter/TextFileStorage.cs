@@ -105,10 +105,11 @@ namespace UmpireCounter
         {
             if (FilePathSettings == null || !File.Exists(FilePathSettings))
             {
-                Score.BallsInOver = 6;
                 SettingsPage.Vibrate = true;
+                Score.BallsInOver = 6;
                 SettingsPage.TimerOnOff = true;
-                SettingsPage.LoadInPage = false;
+                SettingsPage.DisplayRuns = true;
+                SettingsPage.DisplayWickets = true;
                 TextFileStorage.WriteSettings();
             }
             else
@@ -122,7 +123,7 @@ namespace UmpireCounter
                     fileSettingsContents.Add(line);
                 }
                 fileSettingsRead.Dispose();
-                if (fileSettingsContents.Count == 4)
+                if (fileSettingsContents.Count == 5)
                 {
                                         
                     if (fileSettingsContents[0] == "True")
@@ -134,6 +135,11 @@ namespace UmpireCounter
                         SettingsPage.Vibrate = false;
                     }
 
+                    if (int.TryParse(fileSettingsContents[1], out int ballsOver))
+                    {
+                        Score.BallsInOver = ballsOver;
+                    }
+
                     if (fileSettingsContents[2] == "True")
                     {
                         SettingsPage.TimerOnOff = true;
@@ -143,26 +149,31 @@ namespace UmpireCounter
                         SettingsPage.TimerOnOff = false;
                     }
 
-                    if (int.TryParse(fileSettingsContents[1], out int ballsOver))
-                    {
-                        Score.BallsInOver = ballsOver;
-                    }
-
                     if (fileSettingsContents[3] == "True")
                     {
-                        SettingsPage.LoadInPage = true;
+                        SettingsPage.DisplayRuns = true;
                     }
                     else if (fileSettingsContents[3] == "False")
                     {
-                        SettingsPage.LoadInPage = false;
+                        SettingsPage.DisplayRuns = false;
+                    }
+
+                    if (fileSettingsContents[4] == "True")
+                    {
+                        SettingsPage.DisplayWickets = true;
+                    }
+                    else if (fileSettingsContents[4] == "False")
+                    {
+                        SettingsPage.DisplayWickets = false;
                     }
                 }
                 else
                 {
-                    Score.BallsInOver = 6;
                     SettingsPage.Vibrate = true;
+                    Score.BallsInOver = 6;
                     SettingsPage.TimerOnOff = true;
-                    SettingsPage.LoadInPage = false;
+                    SettingsPage.DisplayRuns = true;
+                    SettingsPage.DisplayWickets = true;
                     TextFileStorage.WriteSettings();
                 }
                 
@@ -179,7 +190,8 @@ namespace UmpireCounter
                 fileSettingsWrite.WriteLine(SettingsPage.Vibrate.ToString());
                 fileSettingsWrite.WriteLine(Score.BallsInOver.ToString());
                 fileSettingsWrite.WriteLine(SettingsPage.TimerOnOff.ToString());
-                fileSettingsWrite.WriteLine(SettingsPage.LoadInPage.ToString());
+                fileSettingsWrite.WriteLine(SettingsPage.DisplayRuns.ToString());
+                fileSettingsWrite.WriteLine(SettingsPage.DisplayWickets.ToString());
 
                 fileSettingsWrite.Flush();
                 fileSettingsWrite.Close();
