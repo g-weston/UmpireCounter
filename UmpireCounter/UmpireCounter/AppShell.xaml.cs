@@ -13,16 +13,25 @@ namespace UmpireCounter
             InitializeComponent();
             
         }
-        
+
+        public static bool AboutPageShowing;
+
         protected override bool OnBackButtonPressed()
         {
-            NavigateBackCounter();
-            return true;
+            if (AboutPageShowing)
+            {
+                AboutPageShowing = false;
+                return base.OnBackButtonPressed();
+            }
+            else
+            {
+                NavigateBackCounter();
+                return true;
+            }
         }
         
         public async void NavigateBackCounter()
         {
-            await Shell.Current.GoToAsync("////SettingsPage");
             await Shell.Current.GoToAsync("////AdvancedCounter");
         }
 
@@ -41,6 +50,7 @@ namespace UmpireCounter
         
         private async void AboutButtonClicked(object sender, EventArgs e)
         {
+            AboutPageShowing = true;
             Shell.Current.FlyoutIsPresented = false;
             await Navigation.PushAsync(new AboutPage());
         }

@@ -8,7 +8,7 @@
         <Grid   VerticalOptions="FillAndExpand">
             <Grid.RowDefinitions>
                 <RowDefinition Height="5"/>
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
@@ -29,7 +29,7 @@
                    FontSize="Medium"
                    HorizontalTextAlignment="Center"
                    HorizontalOptions="FillAndExpand"
-                   VerticalOptions="FillAndExpand"
+                   VerticalOptions="CenterAndExpand"
                    Grid.Row="1"
                    Grid.Column="1"
                    Grid.ColumnSpan="2"/>
@@ -38,7 +38,7 @@
                    FontSize="Medium"
                    HorizontalTextAlignment="Center"
                    HorizontalOptions="FillAndExpand"
-                   VerticalOptions="FillAndExpand"
+                   VerticalOptions="CenterAndExpand"
                    Grid.Row="2"
                    Grid.Column="1"
                    Grid.ColumnSpan="2"/>
@@ -47,7 +47,7 @@
                    FontSize="Medium"
                    HorizontalTextAlignment="Center"
                    HorizontalOptions="FillAndExpand"
-                   VerticalOptions="FillAndExpand"
+                   VerticalOptions="CenterAndExpand"
                    Grid.Row="3"
                    Grid.Column="1"
                    Grid.ColumnSpan="2"/>
@@ -57,7 +57,9 @@
                    TextColor="Gray"
                    Keyboard="Numeric"
                    Grid.Row="1"
-                   Grid.Column="3"/>
+                   Grid.Column="3"
+                   HeightRequest="50"
+                   VerticalOptions="Center"/>
 
             <Switch x:Name="VibrateSwitch"
                     ThumbColor="Gray"
@@ -77,7 +79,7 @@
                    FontSize="Medium"
                    HorizontalTextAlignment="Center"
                    HorizontalOptions="FillAndExpand"
-                   VerticalOptions="FillAndExpand"
+                   VerticalOptions="CenterAndExpand"
                    Grid.Row="4"
                    Grid.Column="1"
                    Grid.ColumnSpan="2"/>
@@ -93,7 +95,7 @@
                    FontSize="Medium"
                    HorizontalTextAlignment="Center"
                    HorizontalOptions="FillAndExpand"
-                   VerticalOptions="FillAndExpand"
+                   VerticalOptions="CenterAndExpand"
                    Grid.Row="5"
                    Grid.Column="1" 
                    Grid.ColumnSpan="2"/>
