@@ -34,7 +34,7 @@
                        HorizontalTextAlignment="Center"
                        Grid.Row="1" 
                        Grid.Column="1"/>
-                <Label Text="Version 0.11"
+                <Label Text="Version 0.18"
                        VerticalOptions="CenterAndExpand"
                        HorizontalOptions="CenterAndExpand"
                        TextColor="{AppThemeBinding Light=Gray, Dark={StaticResource Secondary}}"
